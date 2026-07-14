@@ -1,16 +1,26 @@
 from selenium.webdriver.common.by import By
 
-# Шапка сайта
-HEADER_NAV = (By.CLASS_NAME, "AppHeader_header__nav__g5hnF")
 
-# Логотип Stellar Burgers (ссылка на главную)
-LOGO_LINK = (By.CLASS_NAME, "AppHeader_header__logo__2D0X2")
+
+# Навигационное меню (по тегу nav)
+HEADER_NAV = (By.TAG_NAME, "nav")
+
+# Логотип Stellar Burgers (ссылка с href="/")
+LOGO_LINK = (By.CSS_SELECTOR, "a[href='/']")
 
 # Ссылка "Конструктор" в шапке
 LINK_CONSTRUCTOR = (By.LINK_TEXT, "Конструктор")
 
 # Ссылка "Личный Кабинет" в шапке
 LINK_PERSONAL_ACCOUNT = (By.LINK_TEXT, "Личный Кабинет")
+
+# Логотип Stellar Burgers (ссылка с href="/")
+LOGO_LINK = (By.CSS_SELECTOR, "a[href='/']")
+
+# Контейнер логотипа (для проверки видимости)
+LOGO_CONTAINER = (By.CSS_SELECTOR, "[class*='logo'] svg")
+
+
 
 # Кнопка "Войти в аккаунт" на главной
 BUTTON_LOGIN_MAIN = (By.XPATH, '//button[text()="Войти в аккаунт"]')
@@ -27,8 +37,8 @@ TAB_SAUCE = (By.XPATH, "//span[contains(text(), 'Соусы')]")
 # Вкладка "Начинки"
 TAB_FILLING = (By.XPATH, "//span[contains(text(), 'Начинки')]")
 
-# Активная вкладка (любая с классом tab_tab_type_current)
-TAB_ACTIVE = (By.CLASS_NAME, "tab_tab_type_current__2BEPc")
+# Активная вкладка (по атрибуту или тексту)
+TAB_ACTIVE = (By.CSS_SELECTOR, "[class*='tab_tab_type_current']")
 
 # Заголовок раздела "Булки"
 HEADER_BUNS_SECTION = (By.XPATH, "//h2[contains(text(), 'Булки')]")
@@ -39,20 +49,23 @@ HEADER_SAUCE_SECTION = (By.XPATH, "//h2[contains(text(), 'Соусы')]")
 # Заголовок раздела "Начинки"
 HEADER_FILLING_SECTION = (By.XPATH, "//h2[contains(text(), 'Начинки')]")
 
-# Список ингредиентов
-INGREDIENTS_LIST = (By.CLASS_NAME, "BurgerIngredients_ingredients__list__2A-mT")
+# Список ингредиентов (по data-testid или структуре)
+INGREDIENTS_LIST = (By.CSS_SELECTOR, "[class*='ingredients'][class*='list']")
 
 # Корзина бургера
-BASKET = (By.CLASS_NAME, "BurgerConstructor_basket__29Cd7")
+BASKET = (By.CSS_SELECTOR, "[class*='basket']")
 
-# Контейнер формы входа
-LOGIN_CONTAINER = (By.CLASS_NAME, "Auth_login__3hAey")
+
+
+
+# Контейнер формы входа (по структуре)
+LOGIN_CONTAINER = (By.CSS_SELECTOR, "[class*='Auth'][class*='login']")
 
 # Заголовок "Вход"
 HEADER_LOGIN = (By.XPATH, "//h2[contains(text(), 'Вход')]")
 
 # Форма входа
-FORM_LOGIN = (By.CLASS_NAME, "Auth_form__3qKeq")
+FORM_LOGIN = (By.CSS_SELECTOR, "form[class*='Auth']")
 
 # Поле ввода Email
 INPUT_EMAIL = (By.NAME, "email")
@@ -78,11 +91,14 @@ LINK_LOGIN = (By.LINK_TEXT, "Войти")
 # Текст "Уже зарегистрированы?"
 TEXT_ALREADY_REGISTERED = (By.XPATH, "//p[contains(text(), 'Уже зарегистрированы?')]")
 
+
+# СТРАНИЦА РЕГИСТРАЦИИ
+
 # Заголовок "Регистрация"
 HEADER_REGISTER = (By.XPATH, "//h2[contains(text(), 'Регистрация')]")
 
 # Форма регистрации
-FORM_REGISTER = (By.CLASS_NAME, "Auth_form__3qKeq")
+FORM_REGISTER = (By.CSS_SELECTOR, "form[class*='Auth']")
 
 # Поле ввода Имя
 INPUT_NAME = (By.NAME, "name")
@@ -97,30 +113,22 @@ BUTTON_REGISTER = (By.XPATH, "//button[text()='Зарегистрировать�
 ERROR_MESSAGE = (By.XPATH, "//p[contains(text(), 'Некорректный пароль')]")
 
 
+# ЛИЧНЫЙ КАБИНЕТ
+
 # Контейнер личного кабинета
-ACCOUNT_CONTAINER = (By.CLASS_NAME, "Account_account__vgk_w")
+ACCOUNT_CONTAINER = (By.CSS_SELECTOR, "[class*='Account'][class*='account']")
 
 # Заголовок "Личный кабинет"
 HEADER_ACCOUNT = (By.XPATH, "//h2[contains(text(), 'Личный кабинет')]")
+
+# Текст "Личный Кабинет" (для проверки успешного входа)
+TEXT_PERSONAL_ACCOUNT = "//p[contains(text(), 'Личный Кабинет')]"
 
 # Кнопка "Выход"
 BUTTON_LOGOUT = (By.XPATH, "//button[contains(text(), 'Выход')]")
 
 # Текст с информацией о разделе
-ACCOUNT_INFO_TEXT = (By.CLASS_NAME, "Account_text__fZAIn")
+ACCOUNT_INFO_TEXT = (By.CSS_SELECTOR, "[class*='Account_text']")
 
-# Активная ссылка "Личный Кабинет" (с классом link_active)
-LINK_ACCOUNT_ACTIVE = (By.CLASS_NAME, "AppHeader_header__link_active__1IkJo")
-
-
-# URL главной страницы
-URL_MAIN = "https://stellarburgers.education-services.ru/"
-
-# URL страницы входа
-URL_LOGIN = "/login"
-
-# URL личного кабинета
-URL_ACCOUNT = "/account"
-
-# URL восстановления пароля
-URL_RECOVER_PASSWORD = "/forgot-password"
+# Активная ссылка "Личный Кабинет" (по data-testid или aria-current)
+LINK_ACCOUNT_ACTIVE = (By.CSS_SELECTOR, "[aria-current='page']")

@@ -1,29 +1,79 @@
-from selenium.webdriver.common.by import By
+import logging
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from locators import LOGO_LINK, LINK_CONSTRUCTOR
+from config import BASE_URL
 
-def test_from_account_to_constructor_by_link(logged_in_driver):
-    """Проверка перехода из Личного Кабинета в Конструктор по клику на 'Конструктор'"""
-    driver = logged_in_driver
+logger = logging.getLogger(__name__)
 
-    driver.get("https://stellarburgers.education-services.ru/account")
-    WebDriverWait(driver, 10).until(EC.url_contains("/account"))
-    assert "/account" in driver.current_url
-    print("✅ Находимся в Личном Кабинете")
 
-    WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.LINK_TEXT, "Конструктор"))
-    ).click()
+class TestConstructorNavigation:
+    """Тесты перехода из Личного Кабинета в Конструктор"""
 
-    WebDriverWait(driver, 10).until(EC.url_to_be("https://stellarburgers.education-services.ru/"))
-    assert driver.current_url == "https://stellarburgers.education-services.ru/"
+    def test_from_account_to_constructor_by_link(self, logged_in_driver):
+        """Проверка перехода из Личного Кабинета в Конструктор по клику на 'Конструктор'"""
+        driver = logged_in_driver
 
-    WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located((By.CLASS_NAME, "AppHeader_header__logo__2D0X2"))
-    )
-    logo_link = driver.find_element(By.CSS_SELECTOR, ".AppHeader_header__logo__2D0X2 a")
-    assert logo_link.get_attribute("href") == "https://stellarburgers.education-services.ru/"
+        driver.get(f"{BASE_URL}account")
+        WebDriverWait(driver, 10).until(EC.url_contains("/account"))
 
-    print("✅ Переход в Конструктор выполнен! Логотип Stellar Burgers отображается.")
-    
+        WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable(LINK_CONSTRUCTOR)
+        ).click()
 
+        WebDriverWait(driver, 10).until(EC.url_to_be(BASE_URL))
+        assert driver.current_url == BASE_URL
+
+        logger.info("Переход в Конструктор по ссылке выполнен успешно")
+
+    def test_from_account_to_constructor_by_logo(self, logged_in_driver):
+        """Проверка перехода из Личного Кабинета в Конструктор по клику на логотип"""
+        driver = logged_in_driver
+
+        driver.get(f"{BASE_URL}account")
+        WebDriverWait(driver, 10).until(EC.url_contains("/account"))
+
+        WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable(LOGO_LINK)
+        ).click()
+
+        WebDriverWait(driver, 10).until(EC.url_to_be(BASE_URL))
+        assert driver.current_url == BASE_URL
+
+        logger.info("Переход в Конструктор по логотипу выполнен успешно")
+
+    def test_logo_is_visible_on_constructor(self, logged_in_driver):
+        """Проверка, что логотип отображается на странице Конструктора"""
+        driver = logged_in_driver
+
+        driver.get(f"{BASE_URL}account")
+        WebDriverWait(driver, 10).until(EC.url_contains("/account"))
+
+        WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable(LINK_CONSTRUCTOR)
+        ).click()
+        WebDriverWait(driver, 10).until(EC.url_to_be(BASE_URL))
+
+        logo = WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located(LOGO_LINK)
+        )
+        assert logo.is_displayed()
+
+        logger.info("Логотип отображается на странице Конструктора")
+
+    def test_logo_has_correct_href(self, logged_in_driver):
+        """Проверка, что логотип ведёт на главную страницу"""
+        driver = logged_in_driver
+
+        driver.get(f"{BASE_URL}account")
+        WebDriverWait(driver, 10).until(EC.url_contains("/account"))
+
+        WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable(LINK_CONSTRUCTOR)
+        ).click()
+        WebDriverWait(driver, 10).until(EC.url_to_be(BASE_URL))
+
+        logo_link = driver.find_element(*LOGO_LINK)
+        assert logo_link.get_attribute("href") == BASE_URL
+
+        logger.info("Логотип имеет корректную ссылку на главную страницу")
