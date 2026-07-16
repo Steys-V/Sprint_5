@@ -1,6 +1,9 @@
 from selenium.webdriver.common.by import By
 
 
+# ==========================================
+# ШАПКА САЙТА
+# ==========================================
 
 # Навигационное меню (по тегу nav)
 HEADER_NAV = (By.TAG_NAME, "nav")
@@ -8,19 +11,19 @@ HEADER_NAV = (By.TAG_NAME, "nav")
 # Логотип Stellar Burgers (ссылка с href="/")
 LOGO_LINK = (By.CSS_SELECTOR, "a[href='/']")
 
+# Контейнер логотипа (для проверки видимости)
+LOGO_CONTAINER = (By.CSS_SELECTOR, "[class*='logo'] svg")
+
 # Ссылка "Конструктор" в шапке
 LINK_CONSTRUCTOR = (By.LINK_TEXT, "Конструктор")
 
 # Ссылка "Личный Кабинет" в шапке
 LINK_PERSONAL_ACCOUNT = (By.LINK_TEXT, "Личный Кабинет")
 
-# Логотип Stellar Burgers (ссылка с href="/")
-LOGO_LINK = (By.CSS_SELECTOR, "a[href='/']")
 
-# Контейнер логотипа (для проверки видимости)
-LOGO_CONTAINER = (By.CSS_SELECTOR, "[class*='logo'] svg")
-
-
+# ==========================================
+# ГЛАВНАЯ СТРАНИЦА (КОНСТРУКТОР)
+# ==========================================
 
 # Кнопка "Войти в аккаунт" на главной
 BUTTON_LOGIN_MAIN = (By.XPATH, '//button[text()="Войти в аккаунт"]')
@@ -40,6 +43,15 @@ TAB_FILLING = (By.XPATH, "//span[contains(text(), 'Начинки')]")
 # Активная вкладка (по атрибуту или тексту)
 TAB_ACTIVE = (By.CSS_SELECTOR, "[class*='tab_tab_type_current']")
 
+# Активная вкладка "Булки"
+TAB_ACTIVE_BUNS = (By.XPATH, "//div[contains(@class, 'tab_tab_type_current')]/span[contains(text(), 'Булки')]")
+
+# Активная вкладка "Соусы"
+TAB_ACTIVE_SAUCE = (By.XPATH, "//div[contains(@class, 'tab_tab_type_current')]/span[contains(text(), 'Соусы')]")
+
+# Активная вкладка "Начинки"
+TAB_ACTIVE_FILLING = (By.XPATH, "//div[contains(@class, 'tab_tab_type_current')]/span[contains(text(), 'Начинки')]")
+
 # Заголовок раздела "Булки"
 HEADER_BUNS_SECTION = (By.XPATH, "//h2[contains(text(), 'Булки')]")
 
@@ -56,7 +68,9 @@ INGREDIENTS_LIST = (By.CSS_SELECTOR, "[class*='ingredients'][class*='list']")
 BASKET = (By.CSS_SELECTOR, "[class*='basket']")
 
 
-
+# ==========================================
+# СТРАНИЦА ВХОДА (/login)
+# ==========================================
 
 # Контейнер формы входа (по структуре)
 LOGIN_CONTAINER = (By.CSS_SELECTOR, "[class*='Auth'][class*='login']")
@@ -92,7 +106,9 @@ LINK_LOGIN = (By.LINK_TEXT, "Войти")
 TEXT_ALREADY_REGISTERED = (By.XPATH, "//p[contains(text(), 'Уже зарегистрированы?')]")
 
 
+# ==========================================
 # СТРАНИЦА РЕГИСТРАЦИИ
+# ==========================================
 
 # Заголовок "Регистрация"
 HEADER_REGISTER = (By.XPATH, "//h2[contains(text(), 'Регистрация')]")
@@ -113,7 +129,9 @@ BUTTON_REGISTER = (By.XPATH, "//button[text()='Зарегистрировать�
 ERROR_MESSAGE = (By.XPATH, "//p[contains(text(), 'Некорректный пароль')]")
 
 
+# ==========================================
 # ЛИЧНЫЙ КАБИНЕТ
+# ==========================================
 
 # Контейнер личного кабинета
 ACCOUNT_CONTAINER = (By.CSS_SELECTOR, "[class*='Account'][class*='account']")

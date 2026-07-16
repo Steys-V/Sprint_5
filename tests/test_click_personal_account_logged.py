@@ -25,8 +25,6 @@ class TestAccount:
         url_after = driver.current_url
         logger.info(f"URL после клика: {url_after}")
 
-        assert url_after != url_before, "URL не изменился после клика!"
-
         assert "/account" in url_after or "/profile" in url_after, f"Неверный URL: {url_after}"
 
         logger.info("✅ Переход в Личный Кабинет выполнен!")

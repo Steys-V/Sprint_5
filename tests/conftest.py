@@ -55,6 +55,8 @@ def registered_user(driver, test_credentials):
     """
     Фикстура: регистрирует нового пользователя.
 
+
+
     Returns:
         dict: Данные пользователя (email, password, name)
     """
@@ -87,10 +89,21 @@ def registered_user(driver, test_credentials):
 @pytest.fixture
 def logged_in_driver(driver, registered_user):
     """
-    Фикстура: авторизует зарегистрированного пользователя.
+    Фикстура: авторизует зарегистрированного пользователя и переходит в Личный Кабинет.
 
-    Returns:
-        WebDriver: Браузер с авторизованной сессией
+    Эта фикстура:
+    1. Использует данные зарегистрированного пользователя
+    2. Заполняет форму входа
+    3. Нажимает кнопку "Войти"
+    4. Ожидает успешной авторизации
+    5. Переходит в Личный Кабинет
+
+    Args:
+        driver: WebDriver экземпляр
+        registered_user: Данные пользователя для входа
+
+    Yields:
+        WebDriver: Браузер с авторизованной сессией, находящийся в Личном Кабинете.
     """
     # Вход в систему
     driver.find_element(*INPUT_EMAIL_BY_LABEL).send_keys(registered_user["email"])

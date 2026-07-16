@@ -16,7 +16,6 @@ class TestLogout:
         WebDriverWait(driver, 10).until(
             EC.url_contains("/account")
         )
-        assert "/account" in driver.current_url
         logger.info("Находимся в Личном Кабинете")
 
         WebDriverWait(driver, 10).until(
@@ -32,7 +31,6 @@ class TestLogout:
         WebDriverWait(driver, 10).until(
             EC.url_contains("/login")
         )
-        assert "/login" in driver.current_url
 
         header = driver.find_element(By.XPATH, "//h2[contains(text(), 'Вход')]")
         assert header.is_displayed()

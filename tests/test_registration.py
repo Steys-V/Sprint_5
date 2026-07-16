@@ -41,6 +41,9 @@ class TestRegistration:
         WebDriverWait(driver, 10).until(
             EC.url_contains("/login")
         )
+
+        assert "/login" in driver.current_url, "После регистрации не произошел переход на страницу входа"
+
         logger.info(f"Регистрация успешна для пользователя: {email}")
 
 

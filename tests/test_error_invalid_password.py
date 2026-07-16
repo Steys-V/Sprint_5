@@ -40,7 +40,6 @@ class TestRegistrationErrors:
         error_message = WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.XPATH, "//p[contains(text(), 'Некорректный пароль')]"))
         )
-        assert error_message.is_displayed(), "Сообщение об ошибке не появилось!"
         assert "Некорректный пароль" in error_message.text, f"Неверный текст ошибки: {error_message.text}"
         logger.info("Ошибка при коротком пароле отображается!")
         logger.info(f"Текст ошибки: {error_message.text}")

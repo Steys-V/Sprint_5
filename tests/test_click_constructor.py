@@ -77,3 +77,20 @@ class TestConstructorNavigation:
         assert logo_link.get_attribute("href") == BASE_URL
 
         logger.info("Логотип имеет корректную ссылку на главную страницу")
+
+    def test_logo_has_correct_href(self, logged_in_driver):
+        """Проверка, что логотип ведёт на главную страницу"""
+        driver = logged_in_driver
+
+        driver.get(f"{BASE_URL}account")
+        WebDriverWait(driver, 10).until(EC.url_contains("/account"))
+
+        WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable(LINK_CONSTRUCTOR)
+        ).click()
+        WebDriverWait(driver, 10).until(EC.url_to_be(BASE_URL))
+
+        logo_link = driver.find_element(*LOGO_LINK)
+        assert logo_link.get_attribute("href") == BASE_URL
+
+        logger.info("Логотип имеет корректную ссылку на главную страницу")
